@@ -14,7 +14,6 @@ export default function IdentifyFeature() {
   const username = getUsername() ?? "";
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [includeLocation, setIncludeLocation] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [latest, setLatest] = useState<Observation | null>(null);
