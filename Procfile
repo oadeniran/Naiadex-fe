@@ -1,1 +1,1 @@
-web: serve -s dist -l $PORT
+web: bin/start-nginx-solo
