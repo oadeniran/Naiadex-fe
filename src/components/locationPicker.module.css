@@ -1,0 +1,15 @@
+.picker { display: flex; flex-direction: column; gap: var(--space-2); }
+.methods { display: flex; flex-direction: column; gap: var(--space-2); }
+.searchRow { display: flex; gap: var(--space-2); }
+.rawRow { display: flex; gap: var(--space-2); }
+.methodBtn { border: 1px solid var(--border); background: var(--surface); color: var(--primary);
+  border-radius: var(--radius-sm); padding: 8px 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.methodBtn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.methodBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.input { flex: 1; min-width: 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.95rem; font-family: inherit; }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.map { width: 100%; height: 300px; border-radius: var(--radius); overflow: hidden; }
+.hint { font-size: 0.8rem; color: var(--muted); margin: 0; }
+.current { font-size: 0.85rem; color: var(--primary-ink); font-weight: 600; margin: 0; }
+.status { font-size: 0.85rem; color: var(--err); margin: 0; }

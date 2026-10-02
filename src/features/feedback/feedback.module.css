@@ -1,0 +1,14 @@
+.wrap, .done { display: flex; flex-direction: column; gap: var(--space-3); max-width: 560px; }
+.title { margin: 0; font-size: 1.3rem; }
+.muted { color: var(--muted); margin: 0; }
+.cats { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.cat { border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
+.cat:hover { border-color: var(--accent); }
+.catSel { background: var(--primary); color: #fff; border-color: var(--primary); }
+.textarea { padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 1rem; font-family: inherit; resize: vertical; }
+.textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.primaryBtn { align-self: flex-start; border: none; background: var(--primary); color: #fff;
+  border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); font-weight: 600; cursor: pointer; }
+.primaryBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.error { color: var(--err); margin: 0; }

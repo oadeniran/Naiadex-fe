@@ -1,0 +1,60 @@
+:root {
+  /* Aqua theme: blue-green + white */
+  --ink: #06323a;
+  --primary: #0b7a8c;
+  --primary-strong: #075c6a;
+  --accent: #23bccb;
+  --accent-soft: #d6f2f5;
+  --bg: #eff9fa;
+  --surface: #ffffff;
+  --muted: #5c7a80;
+  --border: #cfe6e9;
+  --ok: #12855a;
+  --err: #b23b3b;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --shadow: 0 1px 3px rgba(6, 50, 58, 0.08), 0 8px 24px rgba(6, 50, 58, 0.05);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.5; }
+button { font-family: inherit; cursor: pointer; }
+
+.app { min-height: 100%; display: flex; flex-direction: column; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.brand { display: flex; align-items: center; gap: var(--space-2); }
+.brand-name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.user-chip { display: flex; align-items: center; gap: var(--space-2); }
+.user-name {
+  font-weight: 600; color: var(--primary-strong);
+  background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; font-size: 0.9rem;
+}
+.link-btn { border: none; background: none; color: var(--muted); font-size: 0.85rem; text-decoration: underline; padding: 0; }
+
+.feature-tabs {
+  display: flex; gap: var(--space-1);
+  padding: 0 var(--space-4);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.tab {
+  border: none; background: none; padding: var(--space-3);
+  color: var(--muted); font-size: 0.95rem; font-weight: 600;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+}
+.tab-active { color: var(--primary); border-bottom-color: var(--primary); }
+
+.content { width: 100%; max-width: 720px; margin: 0 auto; padding: var(--space-4); flex: 1; }
+.feature-tagline { color: var(--muted); margin: 0 0 var(--space-4); }

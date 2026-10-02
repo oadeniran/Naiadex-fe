@@ -1,0 +1,11 @@
+.about { display: flex; flex-direction: column; gap: var(--space-5); max-width: 760px; }
+.hero { text-align: center; padding: var(--space-4) 0; }
+.title { font-size: 2rem; color: var(--primary); margin: 0 0 var(--space-2); }
+.lede { font-size: 1.1rem; color: var(--ink); line-height: 1.6; margin: 0 auto; max-width: 560px; }
+.block h2 { font-size: 1.2rem; margin: 0 0 var(--space-2); }
+.block p { line-height: 1.65; margin: 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); margin-top: var(--space-3); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4); }
+.card h3 { margin: 0 0 var(--space-2); color: var(--primary-ink); }
+.card p { font-size: 0.95rem; line-height: 1.55; margin: 0; }
+.footer { text-align: center; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); padding-top: var(--space-4); margin: 0; }
