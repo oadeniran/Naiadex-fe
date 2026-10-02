@@ -6,8 +6,8 @@ import styles from "./login.module.css";
 
 export default function Login({ onLogin }: { onLogin: (name: string) => void }) {
   const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [error] = useState<string | null>(null);
+  const [busy] = useState(false);
   const trimmed = name.trim();
 
     function submit() {
