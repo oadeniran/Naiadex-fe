@@ -5,6 +5,7 @@ import { getUsername } from "../../../lib/user";
 import type { Site, UserSite, SiteRef } from "../../../lib/types";
 import type { AssessDraft, Action } from "../assessState";
 import SiteMap, { type MapPoint } from "../../../components/SiteMap";
+import LocationPicker, { type LatLng } from "../../../components/LocationPicker";
 
 type Props = { draft: AssessDraft; dispatch: React.Dispatch<Action> };
 
@@ -180,46 +181,21 @@ export default function StepSite({ draft, dispatch }: Props) {
 
 function AddSite({ username, onAdded }: { username: string; onAdded: (s: UserSite) => void }) {
   const [name, setName] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
+  const [coords, setCoords] = useState<LatLng | null>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const [locating, setLocating] = useState(false);
-
-  function useMyLocation() {
-    if (!("geolocation" in navigator)) {
-      setErr("Location isn't available in this browser.");
-      return;
-    }
-    setLocating(true);
-    setErr(null);
-    navigator.geolocation.getCurrentPosition(
-      (p) => {
-        setLat(p.coords.latitude.toFixed(6));
-        setLng(p.coords.longitude.toFixed(6));
-        setLocating(false);
-      },
-      (e) => {
-        setLocating(false);
-        if (e.code === e.PERMISSION_DENIED) setErr("Location permission denied. Enter coordinates manually.");
-        else if (e.code === e.TIMEOUT) setErr("Getting your location timed out — try again.");
-        else setErr("Couldn't get your location. Enter coordinates manually.");
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
-  }
 
   async function save() {
-    const la = parseFloat(lat);
-    const ln = parseFloat(lng);
-    if (!name.trim() || Number.isNaN(la) || Number.isNaN(ln)) {
-      setErr("Name and valid coordinates are required.");
-      return;
-    }
+    if (!name.trim()) { setErr("A site name is required."); return; }
+    if (!coords) { setErr("Set a location (map, address, or coordinates)."); return; }
     setBusy(true);
     setErr(null);
     try {
-      const s = await createMySite(username, { name: name.trim(), latitude: la, longitude: ln });
+      const s = await createMySite(username, {
+        name: name.trim(),
+        latitude: coords.lat,
+        longitude: coords.lng,
+      });
       onAdded(s);
     } catch (e) {
       setErr(e instanceof Error ? e.message : String(e));
@@ -230,19 +206,19 @@ function AddSite({ username, onAdded }: { username: string; onAdded: (s: UserSit
 
   return (
     <div className={styles.addSite}>
-      <input className={styles.input} placeholder="Site name" value={name} onChange={(e) => setName(e.target.value)} />
-      <div className={styles.coordRow}>
-        <input className={styles.input} placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
-        <input className={styles.input} placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)} />
-      </div>
-      <div className={styles.coordRow}>
-        <button className={styles.linkBtn} onClick={useMyLocation} disabled={locating}>
-          {locating ? "Locating…" : "Use my location"}
-        </button>
-        <button className={styles.primaryBtn} onClick={save} disabled={busy}>
-          {busy ? "Saving…" : "Save site"}
-        </button>
-      </div>
+      <input
+        className={styles.input}
+        placeholder="Site name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <LocationPicker value={coords} onChange={setCoords} />
+
+      <button className={styles.primaryBtn} onClick={save} disabled={busy || !name.trim() || !coords}>
+        {busy ? "Saving…" : "Save site"}
+      </button>
+
       {err && <p className={styles.error}>{err}</p>}
     </div>
   );
